@@ -38,22 +38,6 @@ namespace Name.LeonidesSaguisagJr.CLITypeExplorer {
             ShowTypeSummary(type, false);
         }
 
-/*
-        public static void ShowTypeInfo(System.String typeName, System.Boolean showAdditionalProperties) {
-            System.Type type = System.Type.GetType(typeName);
-            if (null == type) {
-                Console.WriteLine("ERROR: Unrecognized type: {0}", typeName);
-                Console.WriteLine("Type names are case-sensitive and should be fully qualified.");
-            } else {
-                ShowInfo(type);
-            }
-        }
-
-        public static void ShowTypeInfo(System.String typeName) {
-            ShowInfo(typeName, false);
-        }
-*/
-
         private static System.String GetFieldAttributes(System.Reflection.FieldInfo fi) {
             System.Text.StringBuilder attributes = new System.Text.StringBuilder();
             if (fi.IsPrivate) {
@@ -232,7 +216,6 @@ namespace Name.LeonidesSaguisagJr.CLITypeExplorer {
                     break;
             }
 
-
             if (type.IsAbstract) {
                 typeSignature.Append("abstract ");
             }
@@ -292,15 +275,5 @@ namespace Name.LeonidesSaguisagJr.CLITypeExplorer {
                 }
             }
         }
-
-/*
-        public static void Main() {
-            // ShowInfo(typeof(System.Collections.Generic.List<System.String>), true);
-            // ShowMethods(typeof(System.Collections.Generic.List<System.String>), true);
-            // ShowFields(typeof(System.Collections.Generic.List<System.String>), true);
-            // ShowProperties(typeof(System.Collections.Generic.List<System.String>), true);
-            ListNamespaceTypes("System.Globalization", false);
-        }
-*/
     }
 }
