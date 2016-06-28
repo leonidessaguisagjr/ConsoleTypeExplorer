@@ -2,13 +2,30 @@
 <Project DefaultTargets="Build"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-    <Target Name="Build">
+    <PropertyGroup>
+        <OutputPath>build\</OutputPath>
+        <BinPath>$(OutputPath)bin\</BinPath>
+        <AppBaseName>CLITypeExplorer</AppBaseName>
+        <OutputAssemblyName>$(AppBaseName).dll</OutputAssemblyName>
+    </PropertyGroup>
+
+    <Target Name="CreateDirs">
+        <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+        <MakeDir Directories="$(BinPath)" Condition="!Exists('$(BinPath)')" />
+    </Target>
+
+    <Target Name="Build" DependsOnTargets="CreateDirs">
         <ItemGroup>
             <CscSource Include="*.cs" />
         </ItemGroup>
         <Csc Sources="@(CscSource)"
             DebugType="full"
+            OutputAssembly="$(BinPath)$(OutputAssemblyName)"
             TargetType="library" />
+    </Target>
+
+    <Target Name="Clean">
+        <RemoveDir Directories="$(OutputPath)" />
     </Target>
 
 </Project>
