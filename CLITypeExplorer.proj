@@ -9,15 +9,19 @@
         <OutputAssemblyName>$(AppBaseName).dll</OutputAssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+        <CscSource Include="*.cs" />
+    </ItemGroup>
+
     <Target Name="CreateDirs">
         <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
         <MakeDir Directories="$(BinPath)" Condition="!Exists('$(BinPath)')" />
     </Target>
 
-    <Target Name="Build" DependsOnTargets="CreateDirs">
-        <ItemGroup>
-            <CscSource Include="*.cs" />
-        </ItemGroup>
+    <Target Name="Build"
+        DependsOnTargets="CreateDirs"
+        Inputs="@(CscSource)"
+        Outputs="$(BinPath)$(OutputAssemblyName)">
         <Csc Sources="@(CscSource)"
             DebugType="full"
             OutputAssembly="$(BinPath)$(OutputAssemblyName)"
