@@ -285,5 +285,9 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
                 }
             }
         }
+
+        public static void PrintNamespaceTypes(System.String nameSpace) {
+            PrintNamespaceTypes(nameSpace, false);
+        }
     }
 }

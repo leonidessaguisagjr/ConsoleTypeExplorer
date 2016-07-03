@@ -1,5 +1,5 @@
 ConsoleTypeExplorer
-===============
+===================
 
 Summary
 -------
@@ -7,14 +7,19 @@ Summary
 Utility for easily inspecting types and namespaces in a C# REPL (e.g. scriptcs).
 
 
-Methods
+Public Static Methods
 -------
 
-* `PrintTypeSummary`
-* `PrintTypeFields`
-* `PrintTypeProperties`
-* `PrintTypeMethods`
-* `PrintNamespaceTypes`
+* `TypeExplorer.PrintTypeSummary(System.Type type, System.Boolean showAdditionalProperties)`
+* `TypeExplorer.PrintTypeSummary(System.Type type)`
+* `TypeExplorer.PrintTypeFields(System.Type type, System.Boolean showNonPublicFields)`
+* `TypeExplorer.PrintTypeFields(System.Type type)`
+* `TypeExplorer.PrintTypeProperties(System.Type type, System.Boolean showNonPublicProperties)`
+* `TypeExplorer.PrintTypeProperties(System.Type type)`
+* `TypeExplorer.PrintTypeMethods(System.Type type, System.Boolean showNonPublicMethods)`
+* `TypeExplorer.PrintTypeMethods(System.Type type)`
+* `TypeExplorer.PrintNamespaceTypes(System.String nameSpace, System.Boolean showNonPublicTypes)`
+* `TypeExplorer.PrintNamespaceTypes(System.String nameSpace)`
 
 
 Usage
