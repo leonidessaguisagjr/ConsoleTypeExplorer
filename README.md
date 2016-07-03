@@ -8,7 +8,7 @@ Utility for easily inspecting types and namespaces in a C# REPL (e.g. scriptcs).
 
 
 Public Static Methods
--------
+---------------------
 
 * `TypeExplorer.PrintTypeSummary(System.Type type, System.Boolean showAdditionalProperties)`
 * `TypeExplorer.PrintTypeSummary(System.Type type)`
@@ -20,6 +20,19 @@ Public Static Methods
 * `TypeExplorer.PrintTypeMethods(System.Type type)`
 * `TypeExplorer.PrintNamespaceTypes(System.String nameSpace, System.Boolean showNonPublicTypes)`
 * `TypeExplorer.PrintNamespaceTypes(System.String nameSpace)`
+
+
+Extension Methods
+-----------------
+
+* `TypeExtension.PrintSummary(this System.Type type, System.Boolean showAdditionalProperties)`
+* `TypeExtension.PrintSummary(this System.Type type)`
+* `TypeExtension.PrintPublicFields(this System.Type type)`
+* `TypeExtension.PrintAllFields(this System.Type type)`
+* `TypeExtension.PrintPublicProperties(this System.Type type)`
+* `TypeExtension.PrintAllProperties(this System.Type type)`
+* `TypeExtension.PrintPublicMethods(this System.Type type)`
+* `TypeExtension.PrintAllMethods(this System.Type type)`
 
 
 Usage
@@ -38,6 +51,19 @@ scriptcs (ctrl-c to exit or :help for help)
 > TypeExplorer.PrintTypeMethods(typeof(TypeExplorer), true);
 ...
 > TypeExplorer.PrintNamespaceTypes("System.Globalization", true);
+```
+
+Extension method usage is as follows:
+
+```
+> scriptcs.exe
+scriptcs (ctrl-c to exit or :help for help)
+
+> #r ".\ConsoleTypeExplorer.dll"
+> using Name.LeonidesSaguisagJr.ConsoleTypeExplorer;
+> typeof(TypeExplorer).PrintSummary();
+...
+> typeof(TypeExplorer).PrintAllMethods();
 ```
 
 Building

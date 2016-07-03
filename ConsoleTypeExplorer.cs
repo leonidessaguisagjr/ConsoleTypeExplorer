@@ -26,6 +26,36 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
     using System.Resources;
     using System.Text;
 
+    public static class TypeExtension {
+        public static void PrintSummary(this System.Type type, System.Boolean showAdditionalProperties) {
+            TypeExplorer.PrintTypeSummary(type, showAdditionalProperties);
+        }
+        public static void PrintSummary(this System.Type type) {
+            TypeExplorer.PrintTypeSummary(type);
+        }
+
+        public static void PrintPublicFields(this System.Type type) {
+            TypeExplorer.PrintTypeFields(type);
+        }
+        public static void PrintAllFields(this System.Type type) {
+            TypeExplorer.PrintTypeFields(type, true);
+        }
+
+        public static void PrintPublicProperties(this System.Type type) {
+            TypeExplorer.PrintTypeProperties(type);
+        }
+        public static void PrintAllProperties(this System.Type type) {
+            TypeExplorer.PrintTypeProperties(type, true);
+        }
+
+        public static void PrintPublicMethods(this System.Type type) {
+            TypeExplorer.PrintTypeMethods(type);
+        }
+        public static void PrintAllMethods(this System.Type type) {
+            TypeExplorer.PrintTypeMethods(type, true);
+        }
+    }
+
     public sealed class TypeExplorer {
         public static void PrintTypeSummary(System.Type type, System.Boolean showAdditionalProperties) {
             Console.WriteLine("Information for Type: {0}", type.Name);
