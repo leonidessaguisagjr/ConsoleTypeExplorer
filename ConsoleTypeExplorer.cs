@@ -27,7 +27,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
     using System.Text;
 
     public sealed class TypeExplorer {
-        public static void ShowTypeSummary(System.Type type, System.Boolean showAdditionalProperties) {
+        public static void PrintTypeSummary(System.Type type, System.Boolean showAdditionalProperties) {
             Console.WriteLine("Information for Type: {0}", type.Name);
             Console.WriteLine("  FullName: {0}", type.FullName);
             Console.WriteLine("  AssemblyQualifiedName: {0}", type.AssemblyQualifiedName);
@@ -44,8 +44,8 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             }
         }
 
-        public static void ShowTypeSummary(System.Type type) {
-            ShowTypeSummary(type, false);
+        public static void PrintTypeSummary(System.Type type) {
+            PrintTypeSummary(type, false);
         }
 
         private static System.String GetFieldAttributes(System.Reflection.FieldInfo fi) {
@@ -78,7 +78,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             return fieldSignature.ToString();
         }
 
-        public static void ShowTypeFields(System.Type type, System.Boolean showNonPublicFields) {
+        public static void PrintTypeFields(System.Type type, System.Boolean showNonPublicFields) {
             Console.WriteLine("Fields for type: {0}", type.Name);
             IEnumerable<System.Reflection.FieldInfo> publicFieldList = from fi in type
                 .GetFields(BindingFlags.Instance|BindingFlags.Static|BindingFlags.DeclaredOnly|BindingFlags.Public) select fi;
@@ -94,8 +94,8 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             }
         }
 
-        public static void ShowTypeFields(System.Type type) {
-            ShowTypeFields(type, false);
+        public static void PrintTypeFields(System.Type type) {
+            PrintTypeFields(type, false);
         }
 
         private static System.String GetPropertySignature(System.Reflection.PropertyInfo pi, System.Int32 indent) {
@@ -112,7 +112,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             return propertySignature.ToString();
         }
 
-        public static void ShowTypeProperties(System.Type type, System.Boolean showNonPublicProperties) {
+        public static void PrintTypeProperties(System.Type type, System.Boolean showNonPublicProperties) {
             Console.WriteLine("Public properties for type: {0}", type.Name);
             IEnumerable<System.Reflection.PropertyInfo> publicPropertyList = from pi in type
                 .GetProperties(BindingFlags.Instance|BindingFlags.Static|BindingFlags.DeclaredOnly|BindingFlags.Public) select pi;
@@ -129,8 +129,8 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             }
         }
 
-        public static void ShowTypeProperties(System.Type type) {
-            ShowTypeProperties(type, false);
+        public static void PrintTypeProperties(System.Type type) {
+            PrintTypeProperties(type, false);
         }
 
         private static System.String GetMethodAttributes(System.Reflection.MethodInfo mi) {
@@ -183,7 +183,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
 
         }
 
-        public static void ShowTypeMethods(System.Type type, System.Boolean showNonPublicMethods) {
+        public static void PrintTypeMethods(System.Type type, System.Boolean showNonPublicMethods) {
             Console.WriteLine("Public methods for type: {0}", type.Name);
             IEnumerable<System.Reflection.MethodInfo> publicMethodList = from mi in type
                 .GetMethods(BindingFlags.Instance|BindingFlags.Static|BindingFlags.DeclaredOnly|BindingFlags.Public) select mi;
@@ -200,8 +200,8 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             }
         }
 
-        public static void ShowTypeMethods(System.Type type) {
-            ShowTypeMethods(type, false);
+        public static void PrintTypeMethods(System.Type type) {
+            PrintTypeMethods(type, false);
         }
 
         private static System.String GetTypeSignature(System.Type type, System.Int32 indent) {
@@ -270,7 +270,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
             return typeSignature.ToString();
         }
 
-        public static void ListNamespaceTypes(System.String nameSpace, System.Boolean showNonPublicTypes) {
+        public static void PrintNamespaceTypes(System.String nameSpace, System.Boolean showNonPublicTypes) {
             Console.WriteLine("Types defined in namespace: {0}", nameSpace);
             IEnumerable<System.Type> publicTypes = from asm in AppDomain.CurrentDomain.GetAssemblies()
                 from t in asm.GetTypes() where t.Namespace == nameSpace && t.IsPublic select t;

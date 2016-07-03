@@ -10,11 +10,11 @@ Utility for easily inspecting types and namespaces in a C# REPL (e.g. scriptcs).
 Methods
 -------
 
-* `ShowTypeSummary`
-* `ShowTypeFields`
-* `ShowTypeProperties`
-* `ShowTypeMethods`
-* `ListNamespaceTypes`
+* `PrintTypeSummary`
+* `PrintTypeFields`
+* `PrintTypeProperties`
+* `PrintTypeMethods`
+* `PrintNamespaceTypes`
 
 
 Usage
@@ -28,11 +28,11 @@ scriptcs (ctrl-c to exit or :help for help)
 
 > #r ".\ConsoleTypeExplorer.dll"
 > using Name.LeonidesSaguisagJr.ConsoleTypeExplorer;
-> TypeExplorer.ShowTypeSummary(typeof(TypeExplorer), true);
+> TypeExplorer.PrintTypeSummary(typeof(TypeExplorer), true);
 ...
-> TypeExplorer.ShowTypeMethods(typeof(TypeExplorer), true);
+> TypeExplorer.PrintTypeMethods(typeof(TypeExplorer), true);
 ...
-> TypeExplorer.ListNamespaceTypes("System.Globalization", true);
+> TypeExplorer.PrintNamespaceTypes("System.Globalization", true);
 ```
 
 Building
