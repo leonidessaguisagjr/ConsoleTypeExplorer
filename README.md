@@ -1,4 +1,4 @@
-CLITypeExplorer
+ConsoleTypeExplorer
 ===============
 
 Summary
@@ -26,8 +26,8 @@ Simply add an assembly reference, add a using directive and start calling the me
 > scriptcs.exe
 scriptcs (ctrl-c to exit or :help for help)
 
-> #r ".\CLITypeExplorer.dll"
-> using Name.LeonidesSaguisagJr.CLITypeExplorer;
+> #r ".\ConsoleTypeExplorer.dll"
+> using Name.LeonidesSaguisagJr.ConsoleTypeExplorer;
 > TypeExplorer.ShowTypeSummary(typeof(TypeExplorer), true);
 ...
 > TypeExplorer.ShowTypeMethods(typeof(TypeExplorer), true);
