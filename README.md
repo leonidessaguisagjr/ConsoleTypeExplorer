@@ -99,6 +99,54 @@ Fields for type: Type
 >
 ```
 
+By default, members and types are displayed with modifiers i.e.:
+
+```
+> typeof(System.Int32).PrintPublicMethods();
+Public methods for type: Int32
+  public sealed virtual new Int32 CompareTo(Object value)
+  public sealed virtual new Int32 CompareTo(Int32 value)
+  public virtual new Boolean Equals(Object obj)
+  public sealed virtual new Boolean Equals(Int32 obj)
+  public virtual new Int32 GetHashCode()
+  public virtual new String ToString()
+  public new String ToString(String format)
+  public sealed virtual new String ToString(IFormatProvider provider)
+  public sealed virtual new String ToString(String format, IFormatProvider provider)
+  public static new Int32 Parse(String s)
+  public static new Int32 Parse(String s, NumberStyles style)
+  public static new Int32 Parse(String s, IFormatProvider provider)
+  public static new Int32 Parse(String s, NumberStyles style, IFormatProvider provider)
+  public static new Boolean TryParse(String s, Int32& result)
+  public static new Boolean TryParse(String s, NumberStyles style, IFormatProvider provider, Int32& result)
+  public sealed virtual new TypeCode GetTypeCode()
+>
+```
+
+To prevent displaying the modifiers, set `TypeExplorer.Options["ShowMemberModifiers"] = false;`.  For example:
+```
+> TypeExplorer.Options["ShowMemberModifiers"] = false;
+False
+> typeof(System.Int32).PrintPublicMethods();
+Public methods for type: Int32
+  Int32 CompareTo(Object value)
+  Int32 CompareTo(Int32 value)
+  Boolean Equals(Object obj)
+  Boolean Equals(Int32 obj)
+  Int32 GetHashCode()
+  String ToString()
+  String ToString(String format)
+  String ToString(IFormatProvider provider)
+  String ToString(String format, IFormatProvider provider)
+  Int32 Parse(String s)
+  Int32 Parse(String s, NumberStyles style)
+  Int32 Parse(String s, IFormatProvider provider)
+  Int32 Parse(String s, NumberStyles style, IFormatProvider provider)
+  Boolean TryParse(String s, Int32& result)
+  Boolean TryParse(String s, NumberStyles style, IFormatProvider provider, Int32& result)
+  TypeCode GetTypeCode()
+```
+
 
 Building
 --------

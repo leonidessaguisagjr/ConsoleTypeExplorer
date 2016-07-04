@@ -62,6 +62,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
         static TypeExplorer() {
             Options = new Dictionary<System.String, System.Boolean>();
             Options["UseFullTypeNames"] = true;
+            Options["ShowMemberModifiers"] = true;
         }
 
         private static System.String GetTypeName(System.Type type) {
@@ -118,7 +119,9 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
 
         private static System.String GetFieldSignature(System.Reflection.FieldInfo fi, System.Int32 indent) {
             System.Text.StringBuilder fieldSignature = new System.Text.StringBuilder(new System.String(' ', indent));
-            fieldSignature.Append(GetFieldAttributes(fi));
+            if (Options["ShowMemberModifiers"]) {
+                fieldSignature.Append(GetFieldAttributes(fi));
+            }
             fieldSignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1}", GetTypeName(fi.FieldType), fi.Name));
             return fieldSignature.ToString();
         }
@@ -215,7 +218,9 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
 
         private static System.String GetMethodSignature(System.Reflection.MethodInfo mi, System.Int32 indent) {
             System.Text.StringBuilder methodSignature = new System.Text.StringBuilder(new System.String(' ', indent));
-            methodSignature.Append(GetMethodAttributes(mi));
+            if (Options["ShowMemberModifiers"]) {
+                methodSignature.Append(GetMethodAttributes(mi));
+            }
             methodSignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1}", GetTypeName(mi.ReturnType), mi.Name));
             methodSignature.Append("(");
             List<string> paramList = new List<string>();
@@ -251,34 +256,35 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
 
         private static System.String GetTypeSignature(System.Type type, System.Int32 indent) {
             System.Text.StringBuilder typeSignature = new System.Text.StringBuilder(new System.String(' ', indent));
-            System.Reflection.TypeAttributes attributes = type.Attributes;
-            System.Reflection.TypeAttributes visibility = attributes & System.Reflection.TypeAttributes.VisibilityMask;
-            switch (visibility) {
-                case TypeAttributes.NotPublic:
-                    typeSignature.Append("private ");
-                    break;
-                case TypeAttributes.Public:
-                    typeSignature.Append("public ");
-                    break;
-                case TypeAttributes.NestedFamily:
-                    typeSignature.Append("protected ");
-                    break;
-                case TypeAttributes.NestedAssembly:
-                    typeSignature.Append("internal");
-                    break;
-                case TypeAttributes.NestedFamORAssem:
-                    typeSignature.Append("protected internal");
-                    break;
-            }
+            if (Options["ShowMemberModifiers"]) {
+                System.Reflection.TypeAttributes attributes = type.Attributes;
+                System.Reflection.TypeAttributes visibility = attributes & System.Reflection.TypeAttributes.VisibilityMask;
+                switch (visibility) {
+                    case TypeAttributes.NotPublic:
+                        typeSignature.Append("private ");
+                        break;
+                    case TypeAttributes.Public:
+                        typeSignature.Append("public ");
+                        break;
+                    case TypeAttributes.NestedFamily:
+                        typeSignature.Append("protected ");
+                        break;
+                    case TypeAttributes.NestedAssembly:
+                        typeSignature.Append("internal");
+                        break;
+                    case TypeAttributes.NestedFamORAssem:
+                        typeSignature.Append("protected internal");
+                        break;
+                }
 
-            if (type.IsAbstract) {
-                typeSignature.Append("abstract ");
-            }
+                if (type.IsAbstract) {
+                    typeSignature.Append("abstract ");
+                }
 
-            if (type.IsSealed) {
-                typeSignature.Append("sealed ");
+                if (type.IsSealed) {
+                    typeSignature.Append("sealed ");
+                }
             }
-
             if (type.IsEnum) {
                 typeSignature.Append("enum ");
             }
@@ -291,7 +297,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
                 typeSignature.Append("class ");
             }
 
-            typeSignature.Append(type.Name);
+            typeSignature.Append(GetTypeName(type));
 
             if (type.IsArray) {
                 typeSignature.Append("[]");
