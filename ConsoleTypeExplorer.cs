@@ -57,6 +57,21 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
     }
 
     public sealed class TypeExplorer {
+        public static Dictionary<System.String, System.Boolean> Options;
+
+        static TypeExplorer() {
+            Options = new Dictionary<System.String, System.Boolean>();
+            Options["UseFullTypeNames"] = true;
+        }
+
+        private static System.String GetTypeName(System.Type type) {
+            if (Options["UseFullTypeNames"]) {
+                return type.FullName;
+            } else {
+                return type.Name;
+            }
+        }
+
         public static void PrintTypeSummary(System.Type type, System.Boolean showAdditionalProperties) {
             Console.WriteLine("Information for Type: {0}", type.Name);
             Console.WriteLine("  FullName: {0}", type.FullName);
@@ -104,7 +119,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
         private static System.String GetFieldSignature(System.Reflection.FieldInfo fi, System.Int32 indent) {
             System.Text.StringBuilder fieldSignature = new System.Text.StringBuilder(new System.String(' ', indent));
             fieldSignature.Append(GetFieldAttributes(fi));
-            fieldSignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1}", fi.FieldType.FullName, fi.Name));
+            fieldSignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1}", GetTypeName(fi.FieldType), fi.Name));
             return fieldSignature.ToString();
         }
 
@@ -130,7 +145,7 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
 
         private static System.String GetPropertySignature(System.Reflection.PropertyInfo pi, System.Int32 indent) {
             System.Text.StringBuilder propertySignature = new System.Text.StringBuilder(new System.String(' ', indent));
-            propertySignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1} {{ ", pi.PropertyType.FullName, pi.Name));
+            propertySignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1} {{ ", GetTypeName(pi.PropertyType), pi.Name));
             if (!pi.CanRead) {
                 propertySignature.Append("private ");
             }
@@ -201,11 +216,11 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
         private static System.String GetMethodSignature(System.Reflection.MethodInfo mi, System.Int32 indent) {
             System.Text.StringBuilder methodSignature = new System.Text.StringBuilder(new System.String(' ', indent));
             methodSignature.Append(GetMethodAttributes(mi));
-            methodSignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1}", mi.ReturnType.FullName, mi.Name));
+            methodSignature.Append(string.Format(CultureInfo.CurrentCulture, "{0} {1}", GetTypeName(mi.ReturnType), mi.Name));
             methodSignature.Append("(");
             List<string> paramList = new List<string>();
             foreach (System.Reflection.ParameterInfo paramInfo in mi.GetParameters()) {
-                paramList.Add(string.Format(CultureInfo.CurrentCulture, "{0} {1}", paramInfo.ParameterType.FullName, paramInfo.Name));
+                paramList.Add(string.Format(CultureInfo.CurrentCulture, "{0} {1}", GetTypeName(paramInfo.ParameterType), paramInfo.Name));
             }
             methodSignature.Append(System.String.Join(", ", paramList));
             methodSignature.Append(")");
@@ -286,12 +301,12 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
                 typeSignature.Append(" : ");
                 List<System.String> baseTypeAndInterfaces = new List<System.String>();
                 if (type.BaseType != null) {
-                    baseTypeAndInterfaces.Add(type.BaseType.FullName);
+                    baseTypeAndInterfaces.Add(GetTypeName(type.BaseType));
                 }
                 System.Type[] interfaceList = type.GetInterfaces();
                 if (interfaceList.Length != 0) {
                     foreach (System.Type currInterface in interfaceList) {
-                        baseTypeAndInterfaces.Add(currInterface.FullName);
+                        baseTypeAndInterfaces.Add(GetTypeName(currInterface));
                     }
                 }
                 typeSignature.Append(String.Join(", ", baseTypeAndInterfaces));

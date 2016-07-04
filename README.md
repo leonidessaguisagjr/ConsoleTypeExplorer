@@ -66,6 +66,40 @@ scriptcs (ctrl-c to exit or :help for help)
 > typeof(TypeExplorer).PrintAllMethods();
 ```
 
+Options
+-------
+
+By default, types are shown using the full type names i.e.:
+
+```
+> typeof(System.Type).PrintPublicFields();
+Fields for type: Type
+  public static readonly System.Reflection.MemberFilter FilterAttribute
+  public static readonly System.Reflection.MemberFilter FilterName
+  public static readonly System.Reflection.MemberFilter FilterNameIgnoreCase
+  public static readonly System.Object Missing
+  public static readonly System.Char Delimiter
+  public static readonly System.Type[] EmptyTypes
+>
+```
+
+To use short type names, set `TypeExplorer.Options["UseFullTypeNames"] = false;`.  For example:
+
+```
+> TypeExplorer.Options["UseFullTypeNames"] = false;
+False
+> typeof(System.Type).PrintPublicFields()
+Fields for type: Type
+  public static readonly MemberFilter FilterAttribute
+  public static readonly MemberFilter FilterName
+  public static readonly MemberFilter FilterNameIgnoreCase
+  public static readonly Object Missing
+  public static readonly Char Delimiter
+  public static readonly Type[] EmptyTypes
+>
+```
+
+
 Building
 --------
 
