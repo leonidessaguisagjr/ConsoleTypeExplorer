@@ -4,11 +4,13 @@ ConsoleTypeExplorer
 Summary
 -------
 
-Utility for easily inspecting types and namespaces in a C# REPL (e.g. scriptcs).
+Utility library for easily inspecting types and namespaces in a C# REPL (e.g. scriptcs).
 
 
 Public Static Methods
 ---------------------
+
+This library provides the following public static methods:
 
 * `TypeExplorer.PrintTypeSummary(System.Type type, System.Boolean showAdditionalProperties)`
 * `TypeExplorer.PrintTypeSummary(System.Type type)`
@@ -25,6 +27,8 @@ Public Static Methods
 Extension Methods
 -----------------
 
+This library provides the following extension methods to `System.Type`:
+
 * `TypeExtension.PrintSummary(this System.Type type, System.Boolean showAdditionalProperties)`
 * `TypeExtension.PrintSummary(this System.Type type)`
 * `TypeExtension.PrintPublicFields(this System.Type type)`
@@ -38,7 +42,7 @@ Extension Methods
 Usage
 -----
 
-Simply add an assembly reference, add a using directive and start calling the methods.  For example:
+Simply add an assembly reference, add a using directive and start calling the methods.  For example, the static methods could be used as follows:
 
 ```
 > scriptcs.exe
@@ -53,7 +57,7 @@ scriptcs (ctrl-c to exit or :help for help)
 > TypeExplorer.PrintNamespaceTypes("System.Globalization", true);
 ```
 
-Extension method usage is as follows:
+Extension methods could be used as follows:
 
 ```
 > scriptcs.exe
@@ -151,4 +155,59 @@ Public methods for type: Int32
 Building
 --------
 
-Built using Microsoft Build Tools 2015 and MSBuild.  Should be compatible with Mono but this has not been tested yet.
+This utility library has been built using Microsoft Build Tools 2015 and MSBuild.  It should theoretically be compatible with Mono and .NET Core but this has not been tested yet.
+
+Simply invoke MSBuild with no options to build.
+
+```
+C:\src\github\ConsoleTypeExplorer>msbuild
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 7/12/2016 12:02:49 AM.
+Project "C:\src\github\ConsoleTypeExplorer\ConsoleTypeExplorer.proj" on node 1 (default targets).
+CreateDirs:
+  Creating directory "build\".
+  Creating directory "build\bin\".
+Build:
+  C:\Program Files (x86)\MSBuild\14.0\bin\csc.exe /debug:full /out:build\bin\ConsoleTypeExplorer.dll /target:library As
+  semblyInfo.cs ConsoleTypeExplorer.cs
+Done Building Project "C:\src\github\ConsoleTypeExplorer\ConsoleTypeExplorer.proj" (default targets).
+
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.82
+
+C:\src\github\ConsoleTypeExplorer>
+```
+
+To remove the compiled binaries and any intermediate files, invoke MSBuild with the `/t:clean` switch.
+
+```
+C:\src\github\ConsoleTypeExplorer>msbuild /t:clean
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 7/12/2016 12:03:51 AM.
+Project "C:\src\github\ConsoleTypeExplorer\ConsoleTypeExplorer.proj" on node 1 (clean target(s)).
+Clean:
+  Removing directory "build\".
+Done Building Project "C:\src\github\ConsoleTypeExplorer\ConsoleTypeExplorer.proj" (clean target(s)).
+
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.08
+
+C:\src\github\ConsoleTypeExplorer>
+```
+
+Changelog
+---------
+
+1.0.0.0 (2016-07-12): Initial release
