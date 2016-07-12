@@ -22,6 +22,8 @@ This library provides the following public static methods:
 * `TypeExplorer.PrintTypeMethods(System.Type type)`
 * `TypeExplorer.PrintNamespaceTypes(System.String nameSpace, System.Boolean showNonPublicTypes)`
 * `TypeExplorer.PrintNamespaceTypes(System.String nameSpace)`
+* `TypeExplorer.PrintMatchingTypes(System.String partialTypeName, System.Boolean caseSensitiveSearch)`
+* `TypeExplorer.PrintMatchingTypes(System.String partialTypeName)`
 
 
 Extension Methods
@@ -211,3 +213,4 @@ Changelog
 ---------
 
 1.0.0.0 (2016-07-12): Initial release
+1.1.0.0 (2016-07-12): Add `PrintMatchingTypes` methods

@@ -26,6 +26,23 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
     using System.Resources;
     using System.Text;
 
+    // StringExtensions.Contains extension method copied from:
+    // https://msdn.microsoft.com/en-us/library/dy85x1sa(v=vs.110).aspx
+    public static class StringExtensions {
+       public static bool Contains(this String str, String substring,
+                                   StringComparison comp)
+       {
+          if (substring == null)
+             throw new ArgumentNullException("substring",
+                                             "substring cannot be null.");
+          else if (! Enum.IsDefined(typeof(StringComparison), comp))
+             throw new ArgumentException("comp is not a member of StringComparison",
+                                         "comp");
+
+          return str.IndexOf(substring, comp) >= 0;
+       }
+    }
+
     public static class TypeExtension {
         public static void PrintSummary(this System.Type type, System.Boolean showAdditionalProperties) {
             TypeExplorer.PrintTypeSummary(type, showAdditionalProperties);
@@ -339,6 +356,24 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
 
         public static void PrintNamespaceTypes(System.String nameSpace) {
             PrintNamespaceTypes(nameSpace, false);
+        }
+
+        public static void PrintMatchingTypes(System.String partialTypeName, System.Boolean caseSensitiveSearch) {
+            IEnumerable<System.Type> matchingTypes;
+            if (caseSensitiveSearch) {
+                matchingTypes = from asm in AppDomain.CurrentDomain.GetAssemblies()
+                    from t in asm.GetTypes() where t.Name.Contains(partialTypeName) select t;
+            } else {
+                matchingTypes = from asm in AppDomain.CurrentDomain.GetAssemblies()
+                    from t in asm.GetTypes() where t.Name.Contains(partialTypeName, StringComparison.OrdinalIgnoreCase) select t;
+            }
+            foreach (System.Type type in matchingTypes) {
+                Console.WriteLine(GetTypeSignature(type, 2));
+            }
+        }
+
+        public static void PrintMatchingTypes(System.String partialTypeName) {
+            PrintMatchingTypes(partialTypeName, true);
         }
     }
 }
