@@ -375,5 +375,13 @@ namespace Name.LeonidesSaguisagJr.ConsoleTypeExplorer {
         public static void PrintMatchingTypes(System.String partialTypeName) {
             PrintMatchingTypes(partialTypeName, true);
         }
+
+        public static void PrintAllNamespaces() {
+            IEnumerable<String> namespaces = (from asm in AppDomain.CurrentDomain.GetAssemblies()
+                from t in asm.GetTypes() select t.Namespace).Distinct().OrderBy(t => t);
+            foreach (String currentNamespace in namespaces) {
+                Console.WriteLine("  {0}", currentNamespace);
+            }
+        }
     }
 }

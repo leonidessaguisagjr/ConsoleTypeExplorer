@@ -214,3 +214,4 @@ Changelog
 
  * 1.0.0.0 (2016-07-12): Initial release
  * 1.1.0.0 (2016-07-12): Add `PrintMatchingTypes()` methods
+ * 1.2.0.0 (2016-07-13): Add `PrintAllNamespaces()` method

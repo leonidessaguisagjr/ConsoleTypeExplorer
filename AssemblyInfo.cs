@@ -25,10 +25,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright (c) 2016 Leonides T. Saguisag, Jr.")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("Library for easily inspecting types and namespaces in a C# REPL environment.")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 [assembly: AssemblyProduct("ConsoleTypeExplorer")]
 [assembly: AssemblyTitle("ConsoleTypeExplorer")]
-[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
 
 [assembly: ComVisible(false)]
 
